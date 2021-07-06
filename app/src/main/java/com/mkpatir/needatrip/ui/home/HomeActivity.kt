@@ -4,7 +4,9 @@ import com.mkpatir.needatrip.databinding.ActivityHomeBinding
 import com.mkpatir.needatrip.ui.base.BaseActivity
 import androidx.activity.viewModels
 import com.mkpatir.needatrip.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity: BaseActivity<ActivityHomeBinding,HomeViewModel>() {
 
     override fun setLayout(): Int = R.layout.activity_home
@@ -12,6 +14,6 @@ class HomeActivity: BaseActivity<ActivityHomeBinding,HomeViewModel>() {
     override fun setViewModel(): Lazy<HomeViewModel> = viewModels()
 
     override fun setupUI() {
-
+        getViewModel().getSession()
     }
 }
