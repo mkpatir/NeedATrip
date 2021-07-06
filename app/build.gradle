@@ -1,6 +1,8 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -30,16 +32,39 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
+    def androidDependencies = rootProject.ext.androidDependencies
+    def thirdPartyDependencies = rootProject.ext.thirdPartyDependencies
+    def testDependencies = rootProject.ext.testDependencies
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.5.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
+
+    implementation androidDependencies.appCompat
+    implementation androidDependencies.androidXCore
+    implementation androidDependencies.material
+    implementation androidDependencies.constraintLayout
+    implementation androidDependencies.recyclerView
+    implementation androidDependencies.coroutineCore
+    implementation androidDependencies.coroutineAndroid
+    implementation androidDependencies.viewModelLifecycle
+    implementation androidDependencies.activity
+
+    implementation androidDependencies.hilt
+    kapt androidDependencies.hiltCompiler
+    implementation thirdPartyDependencies.retrofit
+    implementation thirdPartyDependencies.retrofitConverter
+    implementation thirdPartyDependencies.loggingInterceptor
+    implementation thirdPartyDependencies.lottie
+
+    implementation thirdPartyDependencies.sdp
+    implementation thirdPartyDependencies.ssp
+
+    testImplementation testDependencies.junit
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
