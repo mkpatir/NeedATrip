@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingHorizontal="@dimen/margin_l"
+        android:background="@color/alabaster"
+        tools:ignore="ContentDescription">
+
+        <View
+            android:id="@+id/bg_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_rectangle_white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/text_going_day_number"/>
+
+        <ImageView
+            android:id="@+id/icon_calendar"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/margin_s"
+            android:src="@drawable/ic_calendar"
+            app:layout_constraintTop_toTopOf="@id/bg_calendar"
+            app:layout_constraintBottom_toBottomOf="@id/bg_calendar"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_going"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_s"
+            android:layout_marginStart="@dimen/margin_s"
+            android:text="@string/going"
+            android:textAppearance="@style/MediumTextAppearance"
+            android:lines="1"
+            app:layout_constraintTop_toTopOf="@id/bg_calendar"
+            app:layout_constraintStart_toEndOf="@id/icon_calendar"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_going_day_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_s"
+            android:textSize="@dimen/_28ssp"
+            app:layout_constraintStart_toStartOf="@id/title_going"
+            app:layout_constraintTop_toBottomOf="@id/title_going"
+            tools:text="18" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_going_month"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_xs"
+            android:layout_marginEnd="@dimen/margin_xs"
+            android:textAppearance="@style/SmallTextAppearance.Nevada"
+            android:lines="1"
+            app:layout_constraintTop_toTopOf="@id/text_going_day_number"
+            app:layout_constraintBottom_toTopOf="@id/text_going_day"
+            app:layout_constraintStart_toEndOf="@id/text_going_day_number"
+            app:layout_constraintEnd_toStartOf="@id/vertical_line"
+            tools:text="Kasım"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_going_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/SmallTextAppearance.Nevada"
+            android:lines="1"
+            app:layout_constraintTop_toBottomOf="@id/text_going_month"
+            app:layout_constraintBottom_toBottomOf="@id/text_going_day_number"
+            app:layout_constraintStart_toStartOf="@id/text_going_month"
+            app:layout_constraintEnd_toEndOf="@id/text_going_month"
+            tools:text="Pazartesi"/>
+
+        <View
+            android:id="@+id/vertical_line"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/margin_m"
+            android:background="@color/nevada"
+            android:alpha="0.5"
+            app:layout_constraintTop_toTopOf="@id/bg_calendar"
+            app:layout_constraintBottom_toBottomOf="@id/bg_calendar"
+            app:layout_constraintStart_toStartOf="@id/bg_calendar"
+            app:layout_constraintEnd_toEndOf="@id/bg_calendar"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_s"
+            android:text="@string/return_"
+            android:textAppearance="@style/MediumTextAppearance"
+            android:lines="1"
+            app:layout_constraintTop_toTopOf="@id/title_going"
+            app:layout_constraintStart_toEndOf="@id/vertical_line"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_return_day_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_28ssp"
+            app:layout_constraintTop_toBottomOf="@id/title_return"
+            app:layout_constraintStart_toStartOf="@id/title_return"
+            tools:text="20"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_return_month"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_xs"
+            android:layout_marginEnd="@dimen/margin_xs"
+            android:textAppearance="@style/SmallTextAppearance.Nevada"
+            android:lines="1"
+            app:layout_constraintTop_toTopOf="@id/text_return_day_number"
+            app:layout_constraintBottom_toTopOf="@id/text_return_day"
+            app:layout_constraintStart_toEndOf="@id/text_return_day_number"
+            app:layout_constraintEnd_toStartOf="@id/button_return_cancel"
+            tools:text="Kasım"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_return_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/SmallTextAppearance.Nevada"
+            android:lines="1"
+            app:layout_constraintTop_toBottomOf="@id/text_return_month"
+            app:layout_constraintBottom_toBottomOf="@id/text_return_day_number"
+            app:layout_constraintStart_toStartOf="@id/text_return_month"
+            app:layout_constraintEnd_toEndOf="@id/text_return_month"
+            tools:text="Çarşamba"/>
+
+        <ImageView
+            android:id="@+id/button_return_cancel"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/margin_s"
+            android:src="@drawable/ic_cancel"
+            app:layout_constraintTop_toTopOf="@id/bg_calendar"
+            app:layout_constraintBottom_toBottomOf="@id/bg_calendar"
+            app:layout_constraintEnd_toEndOf="@id/bg_calendar"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_find_ticket"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xl"
+            android:layout_marginHorizontal="@dimen/_40sdp"
+            android:text="@string/find_ticket"
+            android:textColor="@color/white"
+            android:textAppearance="@style/BigTextAppearance"
+            android:background="@drawable/bg_rectangle_governor_bay"
+            android:elevation="0dp"
+            app:layout_constraintTop_toBottomOf="@id/bg_calendar"
+            app:layout_constraintStart_toStartOf="@id/bg_calendar"
+            app:layout_constraintEnd_toEndOf="@id/bg_calendar"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

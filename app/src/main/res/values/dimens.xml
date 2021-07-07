@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_xxs">@dimen/_2sdp</dimen>
+    <dimen name="margin_xs">@dimen/_4sdp</dimen>
+    <dimen name="margin_s">@dimen/_8sdp</dimen>
+    <dimen name="margin_m">@dimen/_12sdp</dimen>
+    <dimen name="margin_l">@dimen/_16sdp</dimen>
+    <dimen name="margin_xl">@dimen/_20sdp</dimen>
+
+</resources>

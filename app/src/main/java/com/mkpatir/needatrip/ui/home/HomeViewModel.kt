@@ -1,10 +1,14 @@
 package com.mkpatir.needatrip.ui.home
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mkpatir.needatrip.api.AppRepository
 import com.mkpatir.needatrip.api.models.request.Application
+import com.mkpatir.needatrip.api.models.request.BaseRequest
 import com.mkpatir.needatrip.api.models.request.Connection
 import com.mkpatir.needatrip.api.models.request.SessionRequest
+import com.mkpatir.needatrip.api.models.response.BusLocationData
+import com.mkpatir.needatrip.internal.helpers.DateHelper
 import com.mkpatir.needatrip.internal.helpers.SharedPrefHelper
 import com.mkpatir.needatrip.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +24,17 @@ class HomeViewModel @Inject constructor(
     private val sharedPrefHelper: SharedPrefHelper
 ): BaseViewModel() {
 
-    fun getSession() {
+    val busLocationsLiveData = MutableLiveData<Triple<BusLocationData?,BusLocationData?,ArrayList<BusLocationData>?>>()
+
+    init {
+        getSession()
+    }
+
+    fun findTicket(origin: BusLocationData?, destination: BusLocationData?, date: String){
+
+    }
+
+    private fun getSession() {
         val sessionRequest = SessionRequest(
             connection = Connection(getIpv4HostAddress()),
             application = Application(
@@ -30,7 +44,21 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             callService(appRepository.getSession(sessionRequest)) {
                 sharedPrefHelper.session = it.data
-                getIpv4HostAddress()
+                getBusLocations()
+            }
+        }
+    }
+
+    private fun getBusLocations(){
+        val request = BaseRequest().apply {
+            deviceSession = sharedPrefHelper.session
+            date = DateHelper.getCurrentTime()
+        }
+        viewModelScope.launch {
+            callService(appRepository.getBusLocations(request)){
+                val origin = if (it.data?.isNotEmpty() == true) it.data[0] else null
+                val destination = it.data?.find { item -> item.id != origin?.id && item.parentId != origin?.parentId }
+                busLocationsLiveData.value = Triple(origin,destination,it.data)
             }
         }
     }

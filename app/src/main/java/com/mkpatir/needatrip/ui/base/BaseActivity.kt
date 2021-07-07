@@ -35,7 +35,9 @@ abstract class BaseActivity<D: ViewDataBinding,VM: BaseViewModel>: AppCompatActi
         getViewModel().apply {
             progressLiveData.observe(this@BaseActivity){
                 if (it){
-                    loadingFullScreen.show(supportFragmentManager, LOADING_TAG)
+                    if (loadingFullScreen.isAdded.not()){
+                        loadingFullScreen.show(supportFragmentManager, LOADING_TAG)
+                    }
                 }
                 else {
                     loadingFullScreen.dismiss()

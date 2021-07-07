@@ -8,4 +8,27 @@
         <item name="android:windowBackground">@null</item>
     </style>
 
+    <style name="BigTextAppearance">
+        <item name="android:textSize">@dimen/_16ssp</item>
+    </style>
+
+    <style name="MediumTextAppearance">
+        <item name="android:textSize">@dimen/_14ssp</item>
+        <item name="android:textColor">@color/governor_bay</item>
+    </style>
+
+    <style name="MediumTextAppearance.Nevada">
+        <item name="android:textSize">@dimen/_14ssp</item>
+        <item name="android:textColor">@color/nevada</item>
+    </style>
+
+    <style name="SmallTextAppearance">
+        <item name="android:textSize">@dimen/_12ssp</item>
+    </style>
+
+    <style name="SmallTextAppearance.Nevada">
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:textColor">@color/nevada</item>
+    </style>
+
 </resources>
