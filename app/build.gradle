@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id('kotlin-android-extensions')
 }
 
 android {
@@ -53,6 +54,7 @@ dependencies {
     implementation androidDependencies.coroutineAndroid
     implementation androidDependencies.viewModelLifecycle
     implementation androidDependencies.activity
+    implementation androidDependencies.fragment
 
     implementation androidDependencies.hilt
     kapt androidDependencies.hiltCompiler

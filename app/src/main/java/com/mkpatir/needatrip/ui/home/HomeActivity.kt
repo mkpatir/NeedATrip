@@ -5,6 +5,9 @@ import com.mkpatir.needatrip.ui.base.BaseActivity
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
 import com.mkpatir.needatrip.R
+import com.mkpatir.needatrip.internal.extention.showToast
+import com.mkpatir.needatrip.ui.base.Navigator
+import com.mkpatir.needatrip.ui.journey.JourneyData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,13 +42,27 @@ class HomeActivity: BaseActivity<ActivityHomeBinding,HomeViewModel>() {
             busLocationsLiveData.observe(this@HomeActivity, {
                 busOriginDestinationAdapter.updateAdapter(it.first,it.second,it.third)
             })
+            selectLocationLiveData.observe(this@HomeActivity, {
+                busOriginDestinationAdapter.updateLocation(this@HomeActivity,it.first,it.second)
+            })
         }
     }
 
     private fun initListeners(){
         dateForBusAdapter.findTicketClickListener = { date ->
             val originAndDestination = busOriginDestinationAdapter.getOriginAndDestination()
-            getViewModel().findTicket(originAndDestination.first,originAndDestination.second,date)
+            val journeyData = JourneyData(
+                origin = originAndDestination.first,
+                destination = originAndDestination.second,
+                departureDate = date
+            )
+            Navigator.navigateToJourney(this,journeyData)
+        }
+        busOriginDestinationAdapter.onClick = { key, list ->
+            SelectBottomSheet.show(supportFragmentManager,key, list)
+        }
+        busOriginDestinationAdapter.errorListener = {
+            showToast(it)
         }
     }
 }

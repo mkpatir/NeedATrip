@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="journeyData"
+            type="com.mkpatir.needatrip.ui.journey.JourneyData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/alabaster"
+        tools:ignore="ContentDescription">
+
+        <View
+            android:id="@+id/bg_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70sdp"
+            android:background="@color/governor_bay"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_s"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_s"
+            android:layout_marginEnd="@dimen/_44sdp"
+            android:gravity="center"
+            android:textAppearance="@style/MediumTextAppearance.White"
+            android:lines="1"
+            android:text="@{journeyData.journey}"
+            app:layout_constraintTop_toTopOf="@id/button_back"
+            app:layout_constraintBottom_toBottomOf="@id/button_back"
+            app:layout_constraintStart_toEndOf="@id/button_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="İstanbul Avrupa - Ankara"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_s"
+            android:gravity="center"
+            android:textAppearance="@style/SmallTextAppearance.White"
+            android:lines="1"
+            android:text="@{journeyData.journeyDate}"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            tools:text="18 Kasım Pazartesi"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_journey"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingTop="@dimen/margin_xs"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/bg_top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/item_journey"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

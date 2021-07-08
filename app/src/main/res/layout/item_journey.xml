@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="viewState"
+            type="com.mkpatir.needatrip.ui.journey.JourneyViewState" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/margin_s"
+        android:paddingVertical="@dimen/margin_xs"
+        tools:ignore="ContentDescription">
+
+        <View
+            android:id="@+id/bg_journey"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_line_nobel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/text_origin_destination"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_departure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_s"
+            android:text="@string/departure"
+            android:textAppearance="@style/XSmallTextAppearance"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/text_hour_departure"
+            app:layout_constraintEnd_toEndOf="@id/text_hour_departure"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_hour_departure"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_xs"
+            android:gravity="center"
+            android:textAppearance="@style/BigTextAppearance.GovernorBoy"
+            android:lines="1"
+            android:text="@{viewState.departureHour}"
+            app:layout_constraintTop_toBottomOf="@id/title_departure"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="09:30"/>
+
+        <ImageView
+            android:id="@+id/icon_arrow"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:rotation="180"
+            app:tint="@color/governor_bay"
+            app:layout_constraintTop_toTopOf="@id/text_hour_departure"
+            app:layout_constraintBottom_toBottomOf="@id/text_hour_departure"
+            app:layout_constraintStart_toEndOf="@id/text_hour_departure" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_arrival"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/arrival"
+            android:textAppearance="@style/XSmallTextAppearance"
+            app:layout_constraintTop_toTopOf="@id/title_departure"
+            app:layout_constraintStart_toStartOf="@id/text_hour_arrival"
+            app:layout_constraintEnd_toEndOf="@id/text_hour_arrival"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_hour_arrival"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAppearance="@style/BigTextAppearance.GovernorBoy"
+            android:lines="1"
+            android:text="@{viewState.arrivalHour}"
+            app:layout_constraintTop_toBottomOf="@id/title_departure"
+            app:layout_constraintStart_toEndOf="@id/icon_arrow"
+            tools:text="15:30"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_s"
+            android:padding="@dimen/margin_xs"
+            android:background="@drawable/bg_rectangle_persian_red"
+            android:textAppearance="@style/MediumTextAppearance.White"
+            android:text="@{viewState.price}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="75,00 TL"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_origin_destination"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_xs"
+            android:paddingBottom="@dimen/margin_s"
+            android:textAppearance="@style/SmallTextAppearance.Nevada"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="@{viewState.journey}"
+            app:layout_constraintTop_toBottomOf="@id/text_hour_departure"
+            app:layout_constraintStart_toStartOf="@id/text_hour_departure"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Esenler Otogarı - Ankara Aşti Otogarı"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -9,5 +9,9 @@
     <string name="find_ticket">Bileti Bul</string>
     <string name="going">Gidiş</string>
     <string name="return_">Dönüş</string>
+    <string name="departure">KALKIŞ</string>
+    <string name="arrival">VARIŞ</string>
+    <string name="error_same_location">Hedef ve varış olarak aynı lokasyonu seçemezsiniz.</string>
+    <string name="error_same_city_location">Hedef ve varış olarak aynı şehirde lokasyon seçemezsiniz.</string>
 
 </resources>

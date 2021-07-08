@@ -8,7 +8,6 @@ import com.mkpatir.needatrip.api.models.request.BaseRequest
 import com.mkpatir.needatrip.api.models.request.Connection
 import com.mkpatir.needatrip.api.models.request.SessionRequest
 import com.mkpatir.needatrip.api.models.response.BusLocationData
-import com.mkpatir.needatrip.internal.helpers.DateHelper
 import com.mkpatir.needatrip.internal.helpers.SharedPrefHelper
 import com.mkpatir.needatrip.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +24,7 @@ class HomeViewModel @Inject constructor(
 ): BaseViewModel() {
 
     val busLocationsLiveData = MutableLiveData<Triple<BusLocationData?,BusLocationData?,ArrayList<BusLocationData>?>>()
+    val selectLocationLiveData = MutableLiveData<Pair<OriginDestinationAdapter.Key,BusLocationData>>()
 
     init {
         getSession()
@@ -52,7 +52,6 @@ class HomeViewModel @Inject constructor(
     private fun getBusLocations(){
         val request = BaseRequest().apply {
             deviceSession = sharedPrefHelper.session
-            date = DateHelper.getCurrentTime()
         }
         viewModelScope.launch {
             callService(appRepository.getBusLocations(request)){
