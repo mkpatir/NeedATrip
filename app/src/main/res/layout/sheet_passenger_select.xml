@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/nevada"
+        android:padding="@dimen/margin_m">
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_grown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_m"
+            android:text="@string/grown"
+            android:textAppearance="@style/MediumTextAppearance.White"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            app:layout_constraintStart_toStartOf="@id/picker_grown"
+            app:layout_constraintEnd_toEndOf="@id/picker_grown"/>
+
+        <NumberPicker
+            android:id="@+id/picker_grown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:solidColor="@color/nevada"
+            app:layout_constraintTop_toBottomOf="@id/title_grown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/picker_children"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_children"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_m"
+            android:text="@string/children"
+            android:textAppearance="@style/MediumTextAppearance.White"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            app:layout_constraintStart_toStartOf="@id/picker_children"
+            app:layout_constraintEnd_toEndOf="@id/picker_children"/>
+
+        <NumberPicker
+            android:id="@+id/picker_children"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:solidColor="@color/nevada"
+            app:layout_constraintTop_toBottomOf="@id/title_grown"
+            app:layout_constraintStart_toEndOf="@id/picker_grown"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select"
+            android:textColor="@color/nevada"
+            android:backgroundTint="@color/alabaster"
+            app:layout_constraintTop_toBottomOf="@id/picker_grown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

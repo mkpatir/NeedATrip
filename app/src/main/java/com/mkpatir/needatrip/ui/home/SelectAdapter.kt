@@ -8,7 +8,7 @@ import com.mkpatir.needatrip.databinding.ItemSelectBinding
 
 class SelectAdapter: RecyclerView.Adapter<SelectAdapter.ViewHolder>() {
 
-    private val items: ArrayList<BusLocationData> = arrayListOf()
+    private val items: MutableList<BusLocationData> = mutableListOf()
 
     internal var onClick:(BusLocationData) -> Unit = {}
 
@@ -34,7 +34,7 @@ class SelectAdapter: RecyclerView.Adapter<SelectAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = items.size
 
-    fun updateAdapter(items: ArrayList<BusLocationData>){
+    fun updateAdapter(items: MutableList<BusLocationData>){
         this.items.apply {
             clear()
             addAll(items)

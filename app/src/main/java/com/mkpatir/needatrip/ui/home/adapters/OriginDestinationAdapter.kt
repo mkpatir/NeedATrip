@@ -1,4 +1,4 @@
-package com.mkpatir.needatrip.ui.home
+package com.mkpatir.needatrip.ui.home.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,11 +9,18 @@ import com.mkpatir.needatrip.api.models.response.BusLocationData
 import com.mkpatir.needatrip.databinding.ItemOriginDestinationBinding
 import com.mkpatir.needatrip.internal.extention.setOnClickListeners
 
-class OriginDestinationAdapter: RecyclerView.Adapter<OriginDestinationAdapter.ViewHolder>() {
+class OriginDestinationAdapter(
+    private val type: Type
+): RecyclerView.Adapter<OriginDestinationAdapter.ViewHolder>() {
 
     enum class Key {
         KEY_ORIGIN,
         KEY_DESTINATION
+    }
+
+    enum class Type {
+        BUS,
+        FLIGHT
     }
 
     private var origin: BusLocationData? = null
@@ -21,7 +28,7 @@ class OriginDestinationAdapter: RecyclerView.Adapter<OriginDestinationAdapter.Vi
 
     private var items: ArrayList<BusLocationData> = arrayListOf()
 
-    internal var onClick:(Key,ArrayList<BusLocationData>) -> Unit = { key, list -> }
+    internal var onClick:(Type, Key, ArrayList<BusLocationData>) -> Unit = { type, key, list -> }
     internal var errorListener:(String) -> Unit = {}
 
     inner class ViewHolder(private val binding: ItemOriginDestinationBinding): RecyclerView.ViewHolder(binding.root){
@@ -35,10 +42,10 @@ class OriginDestinationAdapter: RecyclerView.Adapter<OriginDestinationAdapter.Vi
                 setOriginAndDestination()
             }
             setOnClickListeners(arrayOf(binding.textOrigin,binding.titleOrigin)) {
-                onClick(Key.KEY_ORIGIN,items)
+                onClick(type, Key.KEY_ORIGIN,items)
             }
             setOnClickListeners(arrayOf(binding.textDestination,binding.titleDestination)){
-                onClick(Key.KEY_DESTINATION,items)
+                onClick(type, Key.KEY_DESTINATION,items)
             }
         }
 
@@ -51,23 +58,23 @@ class OriginDestinationAdapter: RecyclerView.Adapter<OriginDestinationAdapter.Vi
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OriginDestinationAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ViewHolder(ItemOriginDestinationBinding.inflate(layoutInflater,parent,false))
     }
 
-    override fun onBindViewHolder(holder: OriginDestinationAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind()
     }
 
     override fun getItemCount(): Int = 1
 
-    fun updateAdapter(origin: BusLocationData?,destination: BusLocationData?,items: ArrayList<BusLocationData>?){
+    fun updateAdapter(origin: BusLocationData?,destination: BusLocationData?,items: ArrayList<BusLocationData>){
         this.origin = origin
         this.destination = destination
         this.items.apply {
             clear()
-            items?.let { addAll(it) }
+            addAll(items)
         }
         notifyDataSetChanged()
     }

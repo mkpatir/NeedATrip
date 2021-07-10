@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/alabaster"
         tools:context=".ui.home.HomeActivity">
 
         <View
@@ -15,12 +15,47 @@
             android:background="@color/governor_bay"
             app:layout_constraintTop_toTopOf="parent"/>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_49sdp"
+            android:layout_marginHorizontal="@dimen/_34sdp"
+            android:background="@drawable/tab_bg_white"
+            android:elevation="@dimen/_10sdp"
+            app:tabTextAppearance="@style/SmallTextAppearance"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabBackground="@drawable/tab_bg_selector"
+            app:tabIndicator="@null"
+            app:tabTextColor="@color/governor_bay"
+            app:tabSelectedTextColor="@color/white"
+            app:layout_constraintTop_toTopOf="@id/bg_top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_bus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_bus"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_flight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_flight"/>
+        </com.google.android.material.tabs.TabLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:paddingBottom="@dimen/margin_xl"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:background="@color/white"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/bg_top"
+            app:layout_constraintTop_toBottomOf="@id/tabs"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_origin_destination"
             tools:itemCount="1"/>

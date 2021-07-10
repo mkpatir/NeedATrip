@@ -6,6 +6,7 @@ import com.mkpatir.needatrip.api.AppRepository
 import com.mkpatir.needatrip.api.models.request.BusJourneyRequest
 import com.mkpatir.needatrip.api.models.request.BusJourneyRequestData
 import com.mkpatir.needatrip.api.models.response.BusJourneyData
+import com.mkpatir.needatrip.internal.extention.orArrayList
 import com.mkpatir.needatrip.internal.helpers.SharedPrefHelper
 import com.mkpatir.needatrip.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +27,7 @@ class JourneyViewModel @Inject constructor(
                 deviceSession = sharedPrefHelper.session
             }
             callService(appRepository.getBusJourneys(request)){
-                journeys.value = it.data
+                journeys.value = it.data.orArrayList()
             }
         }
     }

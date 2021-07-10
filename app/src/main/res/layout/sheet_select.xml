@@ -17,13 +17,37 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_s"
+            android:padding="@dimen/margin_m"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawablePadding="@dimen/margin_s"
+            android:background="@color/alabaster"
+            android:textColor="@color/nevada"
+            android:textAppearance="@style/MediumTextAppearance.Nevada"
+            app:layout_constraintTop_toBottomOf="@id/line"/>
+
+        <View
+            android:id="@+id/edt_line"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginHorizontal="@dimen/margin_s"
+            android:background="@color/nevada"
+            android:alpha=".25"
+            app:layout_constraintTop_toBottomOf="@id/edt_search"
+            app:layout_constraintStart_toStartOf="@id/edt_search"
+            app:layout_constraintEnd_toEndOf="@id/edt_search"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_select"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_s"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/line"/>
+            app:layout_constraintTop_toBottomOf="@id/edt_search"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

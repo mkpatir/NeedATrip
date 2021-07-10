@@ -1,5 +1,6 @@
 package com.mkpatir.needatrip.internal.helpers
 
+import com.mkpatir.needatrip.internal.extention.addZeroIfSmall
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
@@ -12,17 +13,27 @@ object DateHelper {
     private const val JOURNEY_DATE_PATTERN = "d MMMM EEEE"
     private const val HOUR_PATTERN = "HH:mm"
 
-    private val simpleDateFormatWithDatePattern = SimpleDateFormat(DATE_PATTERN, Locale("tr"))
-    private val simpleDateFormatWithDateWithoutHourPattern = SimpleDateFormat(DATE_PATTERN_WITHOUT_HOUR, Locale("tr"))
-    private val simpleDateFormatWithBusDatePattern = SimpleDateFormat(BUS_DATE_PATTERN, Locale("tr"))
-    private val simpleDateFormatWithJourneyDatePattern = SimpleDateFormat(JOURNEY_DATE_PATTERN, Locale("tr"))
-    private val simpleDateFormatWithHourPattern = SimpleDateFormat(HOUR_PATTERN, Locale("tr"))
+    private const val DAY_NUMBER_PATTERN = "dd"
+    private const val MONTH_PATTERN = "MMMM"
+    private const val DAY_STRING_PATTERN = "EEEE"
 
-    fun getCurrentTime():String = simpleDateFormatWithDatePattern.format(Date())
+    private val sdfWithDatePattern = SimpleDateFormat(DATE_PATTERN, Locale("tr"))
+    private val sdfWithDateWithoutHourPattern = SimpleDateFormat(DATE_PATTERN_WITHOUT_HOUR, Locale("tr"))
+    private val sdfWithBusDatePattern = SimpleDateFormat(BUS_DATE_PATTERN, Locale("tr"))
+    private val sdfWithJourneyDatePattern = SimpleDateFormat(JOURNEY_DATE_PATTERN, Locale("tr"))
+    private val sdfWithHourPattern = SimpleDateFormat(HOUR_PATTERN, Locale("tr"))
+
+    private val sdfWithDayNumberPattern = SimpleDateFormat(DAY_NUMBER_PATTERN, Locale("tr"))
+    private val sdfWithMonthPattern = SimpleDateFormat(MONTH_PATTERN, Locale("tr"))
+    private val sdfWithDayStringPattern = SimpleDateFormat(DAY_STRING_PATTERN, Locale("tr"))
+
+    fun getCurrentTime():String = sdfWithDatePattern.format(Date())
+
+    fun getDateFromString(dateString: String): Date = sdfWithDatePattern.parse(dateString) ?: Date()
 
     fun getTodayPair(): Pair<String,String> = Pair(
-        simpleDateFormatWithBusDatePattern.format(Date()),
-        addZeroHourToDate(simpleDateFormatWithDateWithoutHourPattern.format(Date()))
+        sdfWithBusDatePattern.format(Date()),
+        addZeroHourToDate(sdfWithDateWithoutHourPattern.format(Date()))
     )
 
     fun getFutureDatePair(amount: Int = 1): Pair<String,String> {
@@ -30,15 +41,15 @@ object DateHelper {
             add(Calendar.DATE,amount)
         }.time
         return Pair(
-            simpleDateFormatWithBusDatePattern.format(date),
-            addZeroHourToDate(simpleDateFormatWithDateWithoutHourPattern.format(date))
+            sdfWithBusDatePattern.format(date),
+            addZeroHourToDate(sdfWithDateWithoutHourPattern.format(date))
         )
     }
 
     fun getHour(dateString: String): String {
         return try {
-            val date = simpleDateFormatWithDatePattern.parse(dateString)
-            simpleDateFormatWithHourPattern.format(date)
+            val date = sdfWithDatePattern.parse(dateString)
+            sdfWithHourPattern.format(date)
         }
         catch (ex: Exception){
             ""
@@ -47,11 +58,52 @@ object DateHelper {
 
     fun convertDateToJourneyDate(dateString: String): String {
         return try {
-            val date = simpleDateFormatWithDatePattern.parse(dateString)
-            return simpleDateFormatWithJourneyDatePattern.format(date)
+            val date = sdfWithDatePattern.parse(dateString)
+            return sdfWithJourneyDatePattern.format(date)
         }
         catch (ex: Exception){
             ""
+        }
+    }
+
+    fun convertDateToPair(year: Int, month: Int, day: Int): Pair<String,String>{
+        return try {
+            val dateString = "${year}-${month.addZeroIfSmall()}-${day.addZeroIfSmall()}T00:00:00"
+            Pair(dateString, sdfWithBusDatePattern.format(sdfWithDatePattern.parse(dateString)))
+        }
+        catch (ex: Exception){
+            Pair("","")
+        }
+    }
+
+    fun getDateForFlight(dateString: String): Triple<String,String,String>{
+        return try {
+            val date = sdfWithDatePattern.parse(dateString)
+            Triple(sdfWithDayNumberPattern.format(date), sdfWithMonthPattern.format(date), sdfWithDayStringPattern.format(date))
+        }
+        catch (ex: Exception){
+            Triple("","","")
+        }
+    }
+
+    fun isAfterSecondDate(dateFirst: String, dateSecond: String): Boolean{
+        return try {
+            sdfWithDatePattern.parse(dateSecond).after(sdfWithDatePattern.parse(dateFirst))
+        }
+        catch (ex: Exception){
+            true
+        }
+    }
+
+    fun getBusDateFromString(dateString: String): Pair<String,String> {
+        return try {
+            Pair(
+                sdfWithBusDatePattern.format(sdfWithDatePattern.parse(dateString)),
+                addZeroHourToDate(sdfWithDateWithoutHourPattern.format(sdfWithDatePattern.parse(dateString)))
+            )
+        }
+        catch (ex: Exception){
+            getFutureDatePair()
         }
     }
 

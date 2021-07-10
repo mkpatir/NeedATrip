@@ -1,10 +1,12 @@
-package com.mkpatir.needatrip.ui.home
+package com.mkpatir.needatrip.ui.home.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mkpatir.needatrip.databinding.ItemDateForBusBinding
+import com.mkpatir.needatrip.internal.extention.openDatePicker
 import com.mkpatir.needatrip.internal.helpers.DateHelper
+import java.util.*
 
 class DateForBusAdapter: RecyclerView.Adapter<DateForBusAdapter.ViewHolder>() {
 
@@ -16,7 +18,7 @@ class DateForBusAdapter: RecyclerView.Adapter<DateForBusAdapter.ViewHolder>() {
 
         fun bind(){
             binding.apply {
-                textCalendar.text = DateHelper.getFutureDatePair().first
+                textCalendar.text = DateHelper.getBusDateFromString(selectedDate).first
                 buttonToday.setOnClickListener {
                     textCalendar.text = DateHelper.getTodayPair().first
                     selectedDate = DateHelper.getTodayPair().second
@@ -27,6 +29,12 @@ class DateForBusAdapter: RecyclerView.Adapter<DateForBusAdapter.ViewHolder>() {
                 }
                 buttonFindTicket.setOnClickListener {
                     findTicketClickListener(selectedDate)
+                }
+                textCalendar.setOnClickListener {
+                    textCalendar.openDatePicker(DateHelper.getDateFromString(selectedDate), Date()) {
+                        selectedDate = it.first
+                        textCalendar.text = it.second
+                    }
                 }
             }
         }
@@ -43,4 +51,9 @@ class DateForBusAdapter: RecyclerView.Adapter<DateForBusAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int = 1
+
+    fun updateDate(date: String){
+        selectedDate = DateHelper.getBusDateFromString(date).second
+        notifyDataSetChanged()
+    }
 }
