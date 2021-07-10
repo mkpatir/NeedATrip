@@ -33,12 +33,21 @@ class HomeViewModel @Inject constructor(
         getSession()
     }
 
+    /**
+     * Yapılan aramayı cihaza kaydeder.
+     * */
     fun saveBusHistory(originId: Int?, destinationId: Int?, departureDate: String){
         sharedPrefHelper.busHistory = HistoryModel(originId, destinationId, departureDate)
     }
 
+    /**
+     * Daha önce yapılmış aramadaki kalkış tarihini getirir.
+     * */
     fun getBusHistoryDate() = sharedPrefHelper.busHistory?.departureDate.orEmpty()
 
+    /**
+     * View model açıldığında session oluşturur.
+     * */
     private fun getSession() {
         val sessionRequest = SessionRequest(
             connection = Connection(ApplicationHelper.getIpv4HostAddress()),
@@ -54,6 +63,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Servisten konumlar çeker.
+     * */
     private fun getBusLocations(){
         val request = BaseRequest().apply {
             deviceSession = sharedPrefHelper.session
@@ -67,6 +79,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Daha önce oluşturulmuş unique id varsa onu döner yoksa oluşturur.
+     * */
     private fun getOrCreateEquipmentId(): String {
         sharedPrefHelper.equipmentId?.let {
             return it
@@ -77,6 +92,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Cihazda kayıtlı başlangıç konumu varsa listenin içinde bulup onu döner yoksa listenin ilk elemanını gönder.
+     * */
     private fun getOrigin(response: BusLocationResponse): BusLocationData? {
         sharedPrefHelper.busHistory?.let {
             return response.data?.find { item -> item.id == it.originId }
@@ -85,6 +103,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Cihazda kayıtlı varış konumu varsa listenin içinde bulup onu döner, yoksa listenin yukarda bulunan başlangıç konumu ile ie ve parentid'si
+     * farklı olan ilk elemanı döner.
+     * */
     private fun getDestination(response: BusLocationResponse, origin: BusLocationData?): BusLocationData? {
         sharedPrefHelper.busHistory?.let {
             return response.data?.find { item -> item.id == it.destinationId }

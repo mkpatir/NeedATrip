@@ -4,6 +4,10 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Konum bilgileri response'udur.
+ * */
+
 data class BusLocationResponse(
     @SerializedName("data") val data: ArrayList<BusLocationData>?
 ): BaseResponse()

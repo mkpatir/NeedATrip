@@ -66,6 +66,9 @@ class DateForFlightAdapter: RecyclerView.Adapter<DateForFlightAdapter.ViewHolder
             }
         }
 
+        /**
+         * Verilen tarih ile text'leri değiştirir.
+         * */
         private fun setDateToTextViews(
             dayNumberView: AppCompatTextView,
             monthView: AppCompatTextView,
@@ -77,6 +80,9 @@ class DateForFlightAdapter: RecyclerView.Adapter<DateForFlightAdapter.ViewHolder
             dayView.text = date.third
         }
 
+        /**
+         * Gidiş terihi text'lerini değiştirir.
+         * */
         private fun setGoingTextViews(){
             binding.apply {
                 setDateToTextViews(
@@ -88,6 +94,9 @@ class DateForFlightAdapter: RecyclerView.Adapter<DateForFlightAdapter.ViewHolder
             }
         }
 
+        /**
+         * Dönüş terihi text'lerini değiştirir.
+         * */
         private fun setReturnTextViews(){
             binding.apply {
                 setDateToTextViews(
@@ -111,6 +120,9 @@ class DateForFlightAdapter: RecyclerView.Adapter<DateForFlightAdapter.ViewHolder
 
     override fun getItemCount(): Int = 1
 
+    /**
+     * Yeni yolcu eklendiğinde adapter'i günceller.
+     * */
     fun updatePassenger(grown: Int, children: Int){
         grownCount = grown
         childrenCount = children

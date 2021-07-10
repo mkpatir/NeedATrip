@@ -2,6 +2,10 @@ package com.mkpatir.needatrip.api.models.response
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * Seyahat bilgileri response'udur.
+ * */
+
 data class BusJourneyResponse(
     @SerializedName("data") val data: ArrayList<BusJourneyData>?
 ) : BaseResponse()

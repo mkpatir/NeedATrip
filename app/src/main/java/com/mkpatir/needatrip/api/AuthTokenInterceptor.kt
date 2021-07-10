@@ -3,6 +3,9 @@ package com.mkpatir.needatrip.api
 import okhttp3.Interceptor
 import okhttp3.Response
 
+/**
+ * Request'e token eklemek için kullanılır.
+ * */
 class AuthTokenInterceptor : Interceptor {
 
     private val apiClientToken = ""

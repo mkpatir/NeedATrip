@@ -3,6 +3,10 @@ package com.mkpatir.needatrip.api.models.request
 import com.google.gson.annotations.SerializedName
 import com.mkpatir.needatrip.BuildConfig
 
+/**
+ * Session oluşturmak için kullanılan request'tir.
+ * */
+
 data class SessionRequest(
     @SerializedName("type") val type: Int = 3,
     @SerializedName("connection") val connection: Connection,

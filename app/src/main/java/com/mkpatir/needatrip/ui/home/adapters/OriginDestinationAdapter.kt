@@ -13,11 +13,17 @@ class OriginDestinationAdapter(
     private val type: Type
 ): RecyclerView.Adapter<OriginDestinationAdapter.ViewHolder>() {
 
+    /**
+     * Başlangıç veya kalkışı belirlemek için kullanılan key'ler.
+     * */
     enum class Key {
         KEY_ORIGIN,
         KEY_DESTINATION
     }
 
+    /**
+     * Otobüs mi yoksa uçak mı belirlemek için kullanılan key'ler.
+     * */
     enum class Type {
         BUS,
         FLIGHT
@@ -79,8 +85,15 @@ class OriginDestinationAdapter(
         notifyDataSetChanged()
     }
 
+    /**
+     * Seçilmiş olan başlangıç ve bitiş noktaları Pair olarak döner.
+     * */
     fun getOriginAndDestination(): Pair<BusLocationData?,BusLocationData?> = Pair(origin,destination)
 
+    /**
+     * Kullanıcının seçmiş olduğu yeni lokasyonun kontrollerini sağlar, başlangıç veya bitiş noktasıyla aynı konum seçilmişse
+     * hata döner, kontroller başarılıysa seçilen yeni konum ile günceller.
+     * */
     fun updateLocation(context: Context, key: Key, locationData: BusLocationData) {
         when(key){
             Key.KEY_ORIGIN -> {

@@ -5,6 +5,9 @@ import java.net.NetworkInterface
 
 object ApplicationHelper {
 
+    /**
+     * IPv4 adresini döner.
+     * */
     fun getIpv4HostAddress(): String {
         NetworkInterface.getNetworkInterfaces()?.toList()?.map { networkInterface ->
             networkInterface.inetAddresses?.toList()?.find {

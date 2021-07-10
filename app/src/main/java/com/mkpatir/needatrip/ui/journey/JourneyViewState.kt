@@ -4,6 +4,9 @@ import com.mkpatir.needatrip.api.models.response.Journey
 import com.mkpatir.needatrip.internal.extention.orZero
 import com.mkpatir.needatrip.internal.helpers.DateHelper
 
+/**
+ * Seferlerin görüntülendiği recycler view adapter'i için kullanılır, ilgili değerleri almak içindir.
+ * */
 data class JourneyViewState(
     private val journey: Journey?
 ) {

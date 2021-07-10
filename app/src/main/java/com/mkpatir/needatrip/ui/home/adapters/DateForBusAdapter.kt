@@ -52,6 +52,9 @@ class DateForBusAdapter: RecyclerView.Adapter<DateForBusAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = 1
 
+    /**
+     * Kalkış tarihini günceller.
+     * */
     fun updateDate(date: String){
         selectedDate = DateHelper.getBusDateFromString(date).second
         notifyDataSetChanged()

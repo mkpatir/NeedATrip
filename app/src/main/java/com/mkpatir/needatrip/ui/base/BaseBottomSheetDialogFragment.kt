@@ -18,12 +18,24 @@ abstract class BaseBottomSheetDialogFragment<VM : BaseViewModel, D : ViewDataBin
     private lateinit var dataBinding: D
     private lateinit var viewModel: VM
 
+    /**
+     * Laout id alıp data binding ile sayfayı oluşturmak içindir.
+     * */
     abstract fun setLayout(): Int
 
+    /**
+     * View modeli almak içindir.
+     * */
     abstract fun setViewModel(): Lazy<VM>
 
+    /**
+     * Sayfa oluştuktan sonra gerekli ui işlemlerini yapmak içindir.
+     * */
     abstract fun setupUI()
 
+    /**
+     * Bottom sheet'in full ekran olup olmayacağını ayarlamak içindir.
+     * */
     abstract fun isFullScreen(): Boolean
 
     override fun onCreateView(

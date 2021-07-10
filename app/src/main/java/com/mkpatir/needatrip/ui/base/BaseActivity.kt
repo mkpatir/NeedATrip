@@ -10,14 +10,26 @@ abstract class BaseActivity<D: ViewDataBinding,VM: BaseViewModel>: AppCompatActi
     private lateinit var dataBinding: D
     private lateinit var viewModel: VM
 
+    /**
+     * Servis çağrıları sırasında görünen tam ekran loading içindir.
+     * */
     private var loadingFullScreen: LoadingFullScreen = LoadingFullScreen().apply {
         isCancelable = false
     }
 
+    /**
+     * Laout id alıp data binding ile sayfayı oluşturmak içindir.
+     * */
     abstract fun setLayout(): Int
 
+    /**
+     * View modeli almak içindir.
+     * */
     abstract fun setViewModel(): Lazy<VM>
 
+    /**
+     * Sayfa oluştuktan sonra gerekli ui işlemlerini yapmak içindir.
+     * */
     abstract fun setupUI()
 
     override fun onCreate(savedInstanceState: Bundle?) {

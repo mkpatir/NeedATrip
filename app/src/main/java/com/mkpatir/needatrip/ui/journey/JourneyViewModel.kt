@@ -21,6 +21,9 @@ class JourneyViewModel @Inject constructor(
 
     val journeys = MutableLiveData<ArrayList<BusJourneyData>>()
 
+    /**
+     * Servisten seferleri getirir.
+     * */
     fun getBusJourneys(busJourneyRequestData: BusJourneyRequestData){
         viewModelScope.launch {
             val request = BusJourneyRequest(busJourneyRequestData).apply {

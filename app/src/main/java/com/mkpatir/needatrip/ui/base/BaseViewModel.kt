@@ -12,6 +12,9 @@ abstract class BaseViewModel: ViewModel() {
 
     val progressLiveData = MutableLiveData<Boolean>()
 
+    /**
+     * Servis çağrısı yapmak için kullanılır.
+     * */
     fun <T> callService(
         service: Flow<T>,
         data:(T) -> Unit

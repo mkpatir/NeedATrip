@@ -7,6 +7,9 @@ import com.google.android.material.tabs.TabLayout
 import com.mkpatir.needatrip.internal.helpers.DateHelper
 import java.util.*
 
+/**
+ * Dizi şeklinde verilen bütün view'lara aynı onClickListener'ı tanımlar.
+ * */
 fun setOnClickListeners(views: Array<View>, onClickListener: () -> Unit){
     views.forEach {
         it.setOnClickListener {
@@ -15,6 +18,9 @@ fun setOnClickListeners(views: Array<View>, onClickListener: () -> Unit){
     }
 }
 
+/**
+ * Tarih seçim picker'ı açılmasını sağlar.
+ * */
 fun AppCompatTextView.openDatePicker(selectedDate: Date, minDate: Date,onDateSelectListener:(Pair<String,String>) -> Unit){
     val calendar = Calendar.getInstance().apply {
         time = selectedDate
@@ -33,6 +39,9 @@ fun AppCompatTextView.openDatePicker(selectedDate: Date, minDate: Date,onDateSel
     }
 }
 
+/**
+ * TabLayout'tan seçilmiş tab'i almak için listener tanımlar.
+ * */
 fun TabLayout.onTabSelected(listener:(tab: TabLayout.Tab?) -> Unit){
     addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
         override fun onTabSelected(tab: TabLayout.Tab?) {

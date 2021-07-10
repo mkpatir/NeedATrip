@@ -5,6 +5,9 @@ import com.mkpatir.needatrip.api.models.response.BusLocationData
 import com.mkpatir.needatrip.internal.helpers.DateHelper
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Anasayfada seçilen seyahat bilgilerinin aktarılması içindir.
+ * */
 @Parcelize
 data class JourneyData(
     val origin: BusLocationData?,

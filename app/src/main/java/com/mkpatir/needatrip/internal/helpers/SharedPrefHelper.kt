@@ -31,7 +31,13 @@ class SharedPrefHelper @Inject constructor (
         get() = getObjectFromJson(sharedPref.getString(BUS_HISTORY,null))
         set(value) = sharedPref.edit().putString(BUS_HISTORY,convertObjectToJson(value)).apply()
 
+    /**
+     * Class'ı json string'e dönüştürür.
+     * */
     private fun <T> convertObjectToJson(data: T?): String = Gson().toJson(data)
 
+    /**
+     * Json string'i class'a dönüştürür.
+     * */
     private inline fun <reified T> getObjectFromJson(json: String?): T? = Gson().fromJson(json,T::class.java)
 }

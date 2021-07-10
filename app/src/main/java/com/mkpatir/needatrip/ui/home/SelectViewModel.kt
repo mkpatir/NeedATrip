@@ -15,12 +15,18 @@ class SelectViewModel @Inject constructor() : BaseViewModel() {
 
     val busLocationsLiveData = MutableLiveData<MutableList<BusLocationData>>()
 
+    /**
+     * Konumların olduğu liste view modele yazılıyor.
+     * */
     fun setBusLocationList(busLocationList: ArrayList<BusLocationData>) {
         this.busLocationList.clear()
         this.busLocationList.addAll(busLocationList)
         busLocationsLiveData.postValue(busLocationList)
     }
 
+    /**
+     * View model'e yazılmış olan liste içinde arama yapar.
+     * */
     fun search(text: String){
         if (text.length >= 3){
             val list = busLocationList.filter { item -> item.name?.toLowerCase(Locale("tr"))?.contains(text.toLowerCase(Locale("tr"))) == true }.toMutableList()
